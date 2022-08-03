@@ -21,7 +21,7 @@ let circle1 = new Circle(5);
 class AreaCalculator {
 
     constructor(shapes) {
-        this.shapes = shapes
+        this.shapes = shapes;
     };
 
     sum() {
@@ -33,11 +33,17 @@ class AreaCalculator {
                 this.totalArea += +(Math.PI * (element.radius * element.radius)).toFixed(2)
             }
         });
-        return this.totalArea;
+        return this.totalArea
     };
+
+    totalArea() {
+        return `totalArea of all the Shapes Provided id ${this.sum()}`
+    }
 
 };
 
 let shapes = [new Square(4), new Circle(5), new Circle(6)]
 
 let sum1 = new AreaCalculator(shapes);
+
+console.log("sum1", sum1.totalArea());
