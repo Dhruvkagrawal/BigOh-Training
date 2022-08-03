@@ -139,101 +139,94 @@
 // TRY # 3
 
 class Person {
-    constructor(name) {
-        this.name = name;
-    }
-
-    displayName() {
-        return this.name;
-    }
+  constructor(name) {
+    this.name = name;
+  }
+  displayName() {
+    return this.name;
+  }
 }
 
 const person1 = new Person("Dhruv");
 
 class MP extends Person {
-    constructor(Name, DriverName, Constituency) {
-        super(Name);
-    
+  constructor(Name, DriverName, Constituency) {
+    super(Name);
     this.DriverName = DriverName;
-        this.Constituency = Constituency;
-        this.spend = 0;
-        this.Post = "Mp";
+    this.Constituency = Constituency;
+    this.spend = 0;
+    this.Post = "Mp";
+  }
+  getConstituency() {
+    return this.Constituency;
+  }
+  getDriver() {
+    return this.DriverName;
+  }
+  getMpSpendLimit() {
+    if (this.Post === "PM") {
+      this.SpendLimit = 1000000000;
+    } else if (this.Post === "Minister") {
+      this.SpendLimit = 10000000;
+    } else if (this.Post === "Mp") {
+      this.SpendLimit = 1000000;
     }
-
-    getConstituency() {
-        return this.Constituency;
-    }
-
-    getDriver() {
-        return this.DriverName;
-    }
-
-    getMpSpendLimit() {
-        if (this.Post === "PM") {
-            this.SpendLimit = 1000000000;
-        } else if (this.Post === "Minister") {
-            this.SpendLimit = 10000000;
-        } else if (this.Post === "Mp") {
-            this.SpendLimit = 1000000;
-        }
-        return this.SpendLimit;
-    }
-
-    Spended(expediture) {
-        let spend = this.spend + expediture;
-        this.spend = spend;
-        return this.spend;
-    };
+    return this.SpendLimit;
+  }
+  Spended(expediture) {
+    let spend = this.spend + expediture;
+    this.spend = spend;
+    return this.spend;
+  }
 }
 
 const JaipurMp = new MP("Krishna", "Rajesh", "Jaipur");
 
 class PM extends MP {
-    constructor(Name, DriverName, Constituency) {
-        super(Name, DriverName, Constituency);
-        this.Post = "PM";
-        this.specialFacility = true;
-    }
+  constructor(Name, DriverName, Constituency) {
+    super(Name, DriverName, Constituency);
+    this.Post = "PM";
+    this.specialFacility = true;
+  }
 }
 
 const indiaPM = new PM("Krishna", "Mahesh", "Raipur");
 
 class Minister extends PM {
-    constructor(Name, DriverName, Constituency) {
-        super(Name, DriverName, Constituency);
-        this.Post = "Minister";
-    }
+  constructor(Name, DriverName, Constituency) {
+    super(Name, DriverName, Constituency);
+    this.Post = "Minister";
+  }
 }
 
 const healthMinister = new Minister("Mahendra", "Mukesh", "Noida");
 
 class comissioner extends Person {
-    constructor(name) {
-        super(name);
-        this.post = "Comissioner";
+  constructor(name) {
+    super(name);
+    this.post = "Comissioner";
+  }
+  mpArrestWarant(culprit) {
+    let warants = [];
+    for (let i = 0; i < culprit.length; i++) {
+        let s1 = culprit[i].spend;
+        let s2 = culprit[i].getMpSpendLimit()
+      if ( s1 > s2) {
+        warants.push(culprit);
+      } else if (s1 > s2) {
+        warants[i].push(culprit);
+      } else if (s1 > s2) {
+        warants.push(culprit);
+      }
     }
-
-    mpArrestWarant(culprit) {
-        let warants = [];
-        for (let i = 0; i < culprit.length; i++) {
-            if (culprit[i].spend > culprit[i].getMpSpendLimit()) {
-                warants.push(culprit);
-            } else if (culprit[i].spend > culprit[i].getMpSpendLimit()) {
-                warants[i].push(culprit);
-            } else if (culprit[i].spend > culprit[i].getMpSpendLimit()) {
-                warants.push(culprit);
-            }
-        }
-        return warants;
+    return warants;
+  }
+  doArrest(from, permission, man) {
+    if (from === "PM" && permission === true && man.Post !== "PM") {
+      return `${man.name} can be arrested`;
+    } else {
+      return `${man.name} can't be arrested`;
     }
-
-    doArrest(from, permission, man) {
-        if (from === "PM" && permission === true && man.Post !== "PM") {
-            return `${man.name} can be arrested`;
-        } else {
-            return `${man.name} can't be arrested`;
-        }
-    }
+  }
 }
-
 const centralComissioner = new comissioner("Ravi");

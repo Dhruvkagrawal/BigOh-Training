@@ -31,7 +31,7 @@ class IOTInverterBattery {
     }
 };
 
-let pcuBattery = new IOTInverterBattery("PCU", 2, 2, true);
+let pcuBattery = new IOTInverterBattery("PCU", 2.4, 240, true);
 let gtiBattery = new IOTInverterBattery("GTI", 3, 3, true);
 let zelioBattery = new IOTInverterBattery("Zelio", 4, 4, false);
 let regaliaBattery = new IOTInverterBattery("Regalia", 5, 5, true);
